@@ -1,5 +1,5 @@
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Button } from "@/components/ui/button"
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Button } from "@/components/ui/button";
 import {
   Calculator,
   PieChart,
@@ -11,7 +11,7 @@ import {
   BarChart,
   Percent,
   Hash,
-} from "lucide-react"
+} from "lucide-react";
 
 const conversations = [
   {
@@ -74,14 +74,18 @@ const conversations = [
     title: "이항분포와 정규분포의 관계",
     icon: <Percent className="h-4 w-4" />,
   },
-]
+];
 
 export function ConversationList() {
   return (
     <ScrollArea className="h-[calc(100vh-240px)]">
       <div className="pr-2">
         {conversations.map((conversation) => (
-          <Button key={conversation.id} variant="ghost" className="w-full justify-start mb-1 text-gray-700 font-normal">
+          <Button
+            key={conversation.id}
+            variant="ghost"
+            className="w-full justify-start mb-1 text-gray-700 font-normal"
+          >
             <div className="mr-2">{conversation.icon}</div>
             <span className="truncate">{conversation.title}</span>
           </Button>
@@ -89,5 +93,5 @@ export function ConversationList() {
       </div>
       <div className="text-xs text-gray-500 mt-4">최근 7일</div>
     </ScrollArea>
-  )
+  );
 }
