@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI 학습 보조 시스템</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/lucide-icons/dist/umd/lucide.css"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap");
+
+      body {
+        font-family: "Noto Sans KR", sans-serif;
+        scroll-behavior: smooth;
+      }
+
+      .gradient-bg {
+        background: linear-gradient(
+          135deg,
+          #a5f3fc 0%,
+          #e0f2fe 50%,
+          #dbeafe 100%
+        );
+      }
+
+      .card-shadow {
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <!-- 페이지 1: 웰컴/랜딩 페이지 -->
+    <section
+      id="welcome"
+      class="min-h-screen flex flex-col items-center justify-center gradient-bg p-6"
+    >
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="mb-8 transform transition-all duration-500 hover:scale-105">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="80"
+            height="80"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="mx-auto text-blue-600"
+          >
+            <path
+              d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+            ></path>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+          </svg>
+        </div>
+
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          AI 학습 보조 시스템
+        </h1>
+        <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+          학생의 자기주도 학습을 지원하고 교사의 맞춤형 교육 개입을 돕는<br />
+          <span class="font-bold">'학습 분석-교수 개입 연계 모델'</span> 기반
+          시스템
+        </p>
+
+        <div class="flex flex-col md:flex-row gap-6 justify-center mb-12">
+          <div class="bg-white rounded-xl p-6 card-shadow max-w-xs">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="48"
+              height="48"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="mb-4 text-blue-500 mx-auto"
+            >
+              <path
+                d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+              ></path>
+            </svg>
+            <h3 class="text-lg font-bold mb-2 text-gray-900">대화형 AI 학습</h3>
+            <p class="text-gray-600">
+              학생의 질문에 형성적 피드백을 제공하여 자기주도 학습을 지원합니다.
+            </p>
+          </div>
+
+          <div class="bg-white rounded-xl p-6 card-shadow max-w-xs">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="48"
+              height="48"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="mb-4 text-blue-500 mx-auto"
+            >
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+              <line x1="8" y1="21" x2="16" y2="21"></line>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+            <h3 class="text-lg font-bold mb-2 text-gray-900">
+              학습 분석 대시보드
+            </h3>
+            <p class="text-gray-600">
+              대화 데이터를 분석하여 학습 지표를 실시간으로 교사에게 제공합니다.
+            </p>
+          </div>
+        </div>
+
+        <button
+          class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300"
+          onclick="document.getElementById('student-interface').scrollIntoView({behavior: 'smooth'})"
+          aria-label="시작하기"
+          tabindex="0"
+          onkeydown="if(event.key === 'Enter' || event.key === ' ') { document.getElementById('student-interface').scrollIntoView({behavior: 'smooth'}) }"
+        >
+          시작하기
+        </button>
+      </div>
+    </section>
+
+    <!-- 페이지 2: 학생 인터페이스 -->
+    <section id="student-interface" class="min-h-screen bg-white py-16 px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="flex justify-between items-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900">AI 학습 도우미</h2>
+          <div class="flex space-x-4">
+            <button
+              class="bg-blue-100 hover:bg-blue-200 text-blue-800 px-4 py-2 rounded-lg flex items-center transition-all"
+              aria-label="학습 기록"
+              tabindex="0"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="mr-2"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              학습 기록
+            </button>
+            <button
+              class="bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-lg flex items-center transition-all"
+              aria-label="프로필"
+              tabindex="0"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="mr-2"
+              >
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              프로필
+            </button>
+          </div>
+        </div>
+
+        <!-- 대화 영역 -->
+        <div
+          class="bg-gray-50 rounded-xl p-6 card-shadow mb-8 h-96 overflow-y-auto"
+        >
+          <div class="flex flex-col space-y-4">
+            <div class="flex items-start">
+              <div class="bg-blue-100 rounded-lg p-4 max-w-xl ml-auto">
+                <p class="text-gray-800">
+                  삼각형의 넓이를 구하는 공식이 뭐예요?
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="bg-gray-100 rounded-lg p-4 max-w-xl">
+                <p class="text-gray-800">
+                  삼각형의 넓이를 구하는 공식은 (밑변 × 높이) ÷ 2 입니다.
+                </p>
+                <p class="text-gray-800 mt-2">
+                  밑변은 삼각형의 한 변을 의미하고, 높이는 그 밑변에 대해 수직인
+                  거리를 의미해요.
+                </p>
+                <p class="text-gray-800 mt-2">
+                  예를 들어, 밑변이 6cm이고 높이가 4cm인 삼각형의 넓이는 (6 × 4)
+                  ÷ 2 = 12cm²가 됩니다.
+                </p>
+                <p class="text-gray-600 text-sm mt-2">
+                  더 자세히 알고 싶은 부분이 있나요?
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="bg-blue-100 rounded-lg p-4 max-w-xl ml-auto">
+                <p class="text-gray-800">
+                  삼각형의 넓이를 구하는 다른 방법도 있나요?
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="bg-gray-100 rounded-lg p-4 max-w-xl">
+                <p class="text-gray-800">
+                  네, 삼각형의 넓이를 구하는 다른 방법들도 있습니다:
+                </p>
+                <ol class="list-decimal pl-5 mt-2 space-y-2 text-gray-800">
+                  <li>
+                    헤론의 공식: 세 변의 길이를 알 때 사용합니다. 넓이 =
+                    √(s(s-a)(s-b)(s-c)) 여기서 s = (a+b+c)/2
+                  </li>
+                  <li>
+                    삼각함수 이용: 두 변의 길이와 그 사이 각을 알 때, 넓이 =
+                    (1/2) × a × b × sin(C)
+                  </li>
+                  <li>
+                    좌표 이용: 세 꼭지점의 좌표를 알 때 사용하는 방법도
+                    있습니다.
+                  </li>
+                </ol>
+                <p class="text-gray-600 text-sm mt-2">
+                  어떤 방법에 대해 더 알고 싶으신가요?
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 입력 영역 -->
+        <div class="flex items-center">
+          <div class="relative flex-grow">
+            <input
+              type="text"
+              placeholder="질문을 입력하세요..."
+              class="w-full py-4 px-6 pr-16 rounded-full border-2 border-gray-200 focus:border-blue-500 focus:outline-none"
+              aria-label="질문 입력"
+            />
+            <button
+              class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-500 hover:bg-blue-600 text-white rounded-full p-2 transition-colors"
+              aria-label="음성 입력"
+              tabindex="0"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"
+                ></path>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                <line x1="12" y1="19" x2="12" y2="23"></line>
+                <line x1="8" y1="23" x2="16" y2="23"></line>
+              </svg>
+            </button>
+          </div>
+          <button
+            class="ml-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-full transition-colors flex items-center"
+            aria-label="전송"
+            tabindex="0"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="mr-2"
+            >
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+            전송
+          </button>
+        </div>
+
+        <!-- 학습 분석 탭 -->
+        <div class="mt-16">
+          <div class="border-b border-gray-200 mb-6">
+            <div class="flex space-x-8">
+              <button
+                class="text-blue-600 border-b-2 border-blue-600 pb-4 font-medium"
+              >
+                실시간 학습 분석
+              </button>
+              <button
+                class="text-gray-500 hover:text-gray-700 pb-4 font-medium"
+              >
+                학습 리포트
+              </button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white rounded-xl p-6 card-shadow">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-gray-900">개념 이해도</h3>
+                <div
+                  class="bg-green-100 text-green-800 text-sm py-1 px-3 rounded-full"
+                >
+                  양호
+                </div>
+              </div>
+              <div class="h-4 bg-gray-200 rounded-full overflow-hidden">
+                <div
+                  class="h-full bg-green-500 rounded-full"
+                  style="width: 85%"
+                ></div>
+              </div>
+              <div class="flex justify-between mt-2 text-sm text-gray-600">
+                <span>0%</span>
+                <span>85%</span>
+                <span>100%</span>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-6 card-shadow">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-gray-900">학습 키워드</h3>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="bg-blue-100 text-blue-800 py-1 px-3 rounded-full text-sm"
+                  >삼각형</span
+                >
+                <span
+                  class="bg-blue-100 text-blue-800 py-1 px-3 rounded-full text-sm"
+                  >넓이</span
+                >
+                <span
+                  class="bg-blue-100 text-blue-800 py-1 px-3 rounded-full text-sm"
+                  >공식</span
+                >
+                <span
+                  class="bg-blue-100 text-blue-800 py-1 px-3 rounded-full text-sm"
+                  >헤론의 공식</span
+                >
+                <span
+                  class="bg-gray-100 text-gray-800 py-1 px-3 rounded-full text-sm"
+                  >삼각함수</span
+                >
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-6 card-shadow">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-gray-900">학습 추천</h3>
+              </div>
+              <ul class="space-y-3">
+                <li class="flex items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="mr-2 text-blue-500"
+                  >
+                    <polyline points="9 11 12 14 22 4"></polyline>
+                    <path
+                      d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                    ></path>
+                  </svg>
+                  <span class="text-gray-700">삼각형의 면적 심화학습</span>
+                </li>
+                <li class="flex items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="mr-2 text-blue-500"
+                  >
+                    <polygon
+                      points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"
+                    ></polygon>
+                    <line x1="8" y1="2" x2="8" y2="18"></line>
+                    <line x1="16" y1="6" x2="16" y2="22"></line>
+                  </svg>
+                  <span class="text-gray-700">삼각형의 성질 복습하기</span>
+                </li>
+                <li class="flex items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="mr-2 text-blue-500"
+                  >
+                    <path
+                      d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                    ></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                  </svg>
+                  <span class="text-gray-700">기하학 문제 연습하기</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 교사용 대시보드 링크 -->
+    <div class="fixed bottom-6 right-6">
+      <a
+        href="#teacher-dashboard"
+        class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-full shadow-lg flex items-center transition-all hover:scale-105"
+        aria-label="교사용 대시보드 열기"
+        tabindex="0"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="mr-2"
+        >
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="3" y1="9" x2="21" y2="9"></line>
+          <line x1="9" y1="21" x2="9" y2="9"></line>
+        </svg>
+        교사용 대시보드
+      </a>
+    </div>
+
+    <!-- 교사용 대시보드 섹션 -->
+    <section id="teacher-dashboard" class="min-h-screen bg-gray-50 py-16 px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="flex justify-between items-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900">
+            교사용 학습 분석 대시보드
+          </h2>
+          <div class="flex space-x-4">
+            <button
+              class="bg-indigo-100 hover:bg-indigo-200 text-indigo-800 px-4 py-2 rounded-lg flex items-center transition-all"
+              aria-label="보고서 다운로드"
+              tabindex="0"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="mr-2"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              보고서 다운로드
+            </button>
+            <button
+              class="bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-lg flex items-center transition-all"
+              aria-label="설정"
+              tabindex="0"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="mr-2"
+              >
+                <circle cx="12" cy="12" r="3"></circle>
+                <path
+                  d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+                ></path>
+              </svg>
+              설정
+            </button>
+          </div>
+        </div>
+
+        <!-- 학생 선택 -->
+        <div class="bg-white rounded-xl p-6 card-shadow mb-8">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-gray-900">학생 선택</h3>
+            <div class="relative w-64">
+              <select
+                class="w-full bg-gray-50 border border-gray-300 text-gray-900 py-2 px-4 pr-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 appearance-none"
+              >
+                <option value="">전체 학생</option>
+                <option value="student1" selected>김철수</option>
+                <option value="student2">이영희</option>
+                <option value="student3">박민준</option>
+                <option value="student4">정소연</option>
+              </select>
+              <div
+                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+              >
+                <svg
+                  class="fill-current h-4 w-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="bg-gray-50 rounded-lg p-4 text-center">
+              <p class="text-sm text-gray-500 mb-1">학습 시간</p>
+              <p class="text-2xl font-bold text-gray-900">5시간 23분</p>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-4 text-center">
+              <p class="text-sm text-gray-500 mb-1">학습 주제</p>
+              <p class="text-2xl font-bold text-gray-900">12개</p>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-4 text-center">
+              <p class="text-sm text-gray-500 mb-1">평균 이해도</p>
+              <p class="text-2xl font-bold text-indigo-600">82%</p>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-4 text-center">
+              <p class="text-sm text-gray-500 mb-1">취약 개념</p>
+              <p class="text-2xl font-bold text-red-500">3개</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 차트 섹션 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+          <!-- 학습 진행도 차트 -->
+          <div class="bg-white rounded-xl p-6 card-shadow">
+            <h3 class="text-lg font-bold text-gray-900 mb-4">주제별 이해도</h3>
+            <div class="h-80">
+              <canvas id="understandingChart"></canvas>
+            </div>
+          </div>
+
+          <!-- 학습 시간 차트 -->
+          <div class="bg-white rounded-xl p-6 card-shadow">
+            <h3 class="text-lg font-bold text-gray-900 mb-4">일별 학습 시간</h3>
+            <div class="h-80">
+              <canvas id="timeChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <!-- 학습 패턴 차트 -->
+          <div class="bg-white rounded-xl p-6 card-shadow">
+            <h3 class="text-lg font-bold text-gray-900 mb-4">학습 패턴</h3>
+            <div class="h-64">
+              <canvas id="patternChart"></canvas>
+            </div>
+          </div>
+
+          <!-- 질문 유형 차트 -->
+          <div class="bg-white rounded-xl p-6 card-shadow">
+            <h3 class="text-lg font-bold text-gray-900 mb-4">질문 유형</h3>
+            <div class="h-64">
+              <canvas id="questionChart"></canvas>
+            </div>
+          </div>
+
+          <!-- 개입 필요 영역 -->
+          <div class="bg-white rounded-xl p-6 card-shadow">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-lg font-bold text-gray-900">
+                교수 개입 필요 영역
+              </h3>
+              <span
+                class="bg-red-100 text-red-600 text-xs font-medium px-2.5 py-0.5 rounded-full"
+                >주의 필요</span
+              >
+            </div>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <div
+                  class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-red-500 mt-2"
+                ></div>
+                <div class="ml-3">
+                  <p class="text-gray-800 font-medium">삼각함수의 기본 개념</p>
+                  <p class="text-gray-500 text-sm">
+                    이해도 45% - 반복적 오류 발생
+                  </p>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-yellow-500 mt-2"
+                ></div>
+                <div class="ml-3">
+                  <p class="text-gray-800 font-medium">헤론의 공식 응용</p>
+                  <p class="text-gray-500 text-sm">
+                    이해도 62% - 문제 해결 어려움
+                  </p>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <div
+                  class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-yellow-500 mt-2"
+                ></div>
+                <div class="ml-3">
+                  <p class="text-gray-800 font-medium">좌표평면에서의 삼각형</p>
+                  <p class="text-gray-500 text-sm">
+                    이해도 58% - 개념 연결 부족
+                  </p>
+                </div>
+              </li>
+            </ul>
+            <button
+              class="mt-4 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+            >
+              맞춤형 학습 자료 생성
+            </button>
+          </div>
+        </div>
+
+        <!-- 최근 학습 활동 -->
+        <div class="bg-white rounded-xl p-6 card-shadow">
+          <h3 class="text-lg font-bold text-gray-900 mb-4">최근 학습 활동</h3>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    일시
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    주제
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    질문 수
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    이해도
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    학습 시간
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+                <tr>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    2023-04-07 14:23
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    삼각형의 넓이
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    8
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                      <div class="ml-2 text-sm font-medium text-green-600">
+                        85%
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    32분
+                  </td>
+                </tr>
+                <tr>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    2023-04-06 16:45
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    삼각함수의 기본 개념
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    12
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                      <div class="ml-2 text-sm font-medium text-red-600">
+                        45%
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    47분
+                  </td>
+                </tr>
+                <tr>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    2023-04-05 10:12
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    헤론의 공식 응용
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    6
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                      <div class="ml-2 text-sm font-medium text-yellow-600">
+                        62%
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    28분
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 간단한 자바스크립트 -->
+    <script>
+      // 메뉴 버튼 클릭 이벤트 등 필요시 추가
+      document.querySelectorAll("button").forEach((button) => {
+        button.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            this.click();
+          }
+        });
+      });
+    </script>
+
+    <!-- Chart.js 라이브러리 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+      // 차트 초기화 함수
+      function initCharts() {
+        // 주제별 이해도 차트
+        const understandingCtx = document
+          .getElementById("understandingChart")
+          .getContext("2d");
+        const understandingChart = new Chart(understandingCtx, {
+          type: "bar",
+          data: {
+            labels: [
+              "기하학 기초",
+              "삼각형의 넓이",
+              "삼각함수 기본",
+              "피타고라스 정리",
+              "헤론의 공식",
+              "좌표평면에서의 삼각형",
+            ],
+            datasets: [
+              {
+                label: "이해도 (%)",
+                data: [92, 85, 45, 78, 62, 58],
+                backgroundColor: [
+                  "rgba(34, 197, 94, 0.6)",
+                  "rgba(34, 197, 94, 0.6)",
+                  "rgba(239, 68, 68, 0.6)",
+                  "rgba(34, 197, 94, 0.6)",
+                  "rgba(234, 179, 8, 0.6)",
+                  "rgba(234, 179, 8, 0.6)",
+                ],
+                borderColor: [
+                  "rgb(34, 197, 94)",
+                  "rgb(34, 197, 94)",
+                  "rgb(239, 68, 68)",
+                  "rgb(34, 197, 94)",
+                  "rgb(234, 179, 8)",
+                  "rgb(234, 179, 8)",
+                ],
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                beginAtZero: true,
+                max: 100,
+              },
+            },
+          },
+        });
+
+        // 일별 학습 시간 차트
+        const timeCtx = document.getElementById("timeChart").getContext("2d");
+        const timeChart = new Chart(timeCtx, {
+          type: "line",
+          data: {
+            labels: ["4/1", "4/2", "4/3", "4/4", "4/5", "4/6", "4/7"],
+            datasets: [
+              {
+                label: "학습 시간 (분)",
+                data: [42, 35, 58, 0, 28, 47, 32],
+                fill: false,
+                backgroundColor: "rgba(79, 70, 229, 0.8)",
+                borderColor: "rgba(79, 70, 229, 0.8)",
+                tension: 0.1,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+          },
+        });
+
+        // 학습 패턴 차트
+        const patternCtx = document
+          .getElementById("patternChart")
+          .getContext("2d");
+        const patternChart = new Chart(patternCtx, {
+          type: "doughnut",
+          data: {
+            labels: ["오전", "오후", "저녁"],
+            datasets: [
+              {
+                label: "학습 시간대",
+                data: [25, 45, 30],
+                backgroundColor: [
+                  "rgba(99, 102, 241, 0.6)",
+                  "rgba(59, 130, 246, 0.6)",
+                  "rgba(139, 92, 246, 0.6)",
+                ],
+                borderColor: [
+                  "rgb(99, 102, 241)",
+                  "rgb(59, 130, 246)",
+                  "rgb(139, 92, 246)",
+                ],
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+          },
+        });
+
+        // 질문 유형 차트
+        const questionCtx = document
+          .getElementById("questionChart")
+          .getContext("2d");
+        const questionChart = new Chart(questionCtx, {
+          type: "pie",
+          data: {
+            labels: ["개념 질문", "문제 해결 질문", "응용 질문", "기타"],
+            datasets: [
+              {
+                label: "질문 유형",
+                data: [40, 35, 20, 5],
+                backgroundColor: [
+                  "rgba(16, 185, 129, 0.6)",
+                  "rgba(245, 158, 11, 0.6)",
+                  "rgba(99, 102, 241, 0.6)",
+                  "rgba(156, 163, 175, 0.6)",
+                ],
+                borderColor: [
+                  "rgb(16, 185, 129)",
+                  "rgb(245, 158, 11)",
+                  "rgb(99, 102, 241)",
+                  "rgb(156, 163, 175)",
+                ],
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+          },
+        });
+      }
+
+      // 페이지 로드 후 차트 초기화
+      window.addEventListener("load", initCharts);
+    </script>
+  </body>
+</html>
