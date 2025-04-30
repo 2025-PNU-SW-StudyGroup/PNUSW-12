@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 
 interface Message {
   id: number;
-  role: "user" | "assistant";
+  role: string;
   content: string;
   timestamp: string;
 }
