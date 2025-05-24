@@ -42,12 +42,12 @@
 # 2. 상세설계
 ## 2.1. 시스템 구성도
 Next.js–ChatGPT API–Supabase를 연결하는 **3계층 구조**를 기반으로, 학생의 질문을 분석하고, 사고 확장형 피드백을 제공하며, 학습 데이터를 체계적으로 관리합니다.
-![image](https://github.com/user-attachments/assets/1b30944a-4fd3-4554-8c44-e95de14ef581)
+<img src="https://github.com/user-attachments/assets/1b30944a-4fd3-4554-8c44-e95de14ef581" style="width:50%;" />
 
 
 # 3. 개발결과
 ## 3.1. 전체시스템 흐름도
-![image](https://github.com/user-attachments/assets/cebe4334-a207-45ee-8162-dee1e8e30565)
+<img src="https://github.com/user-attachments/assets/cebe4334-a207-45ee-8162-dee1e8e30565" style="width:50%;" />
 
 ### 1단계: 질문 입력 및 대화 세션 생성 (Thread 생성)
 - 학생이 문제나 질문을 입력하거나 이미지로 업로드하면, 새로운 대화 세션(Thread)이 시작됩니다.
@@ -85,7 +85,7 @@ Next.js–ChatGPT API–Supabase를 연결하는 **3계층 구조**를 기반으
 - 학생의 질문에 대해 교육청 성취 기준에 맞춰 사고 흐름을 확장하는 형성적 피드백을 제공합니다.
 - 단순 정답 제시가 아닌, 다음 스텝을 유도하고, 사고의 확장 방향을 제안하는 **비고츠키의 ZPD(근접발달영역)** 기반 시스템입니다.
 
-<img src="https://github.com/user-attachments/assets/2996943f-4ae1-4388-8cc0-d0ab9cc5c632" style="width:50%;" />
+<img src="https://github.com/user-attachments/assets/2996943f-4ae1-4388-8cc0-d0ab9cc5c632" style="width:75%;" />
 
 #### 작동 방식
 - **Vision API**를 통해 이미지 기반 질문 인식
@@ -99,7 +99,7 @@ Next.js–ChatGPT API–Supabase를 연결하는 **3계층 구조**를 기반으
 - **Scaffolding(비계 설정)** 원칙에 따라 점진적이고 선별적인 개입을 수행
 - 교육부 교수-학습 지침 반영(2022 개정 교육과정)
 
-![image](https://github.com/user-attachments/assets/b5277d73-6d1d-4a50-a9f8-58a49b64dea4)
+<img src="https://github.com/user-attachments/assets/b5277d73-6d1d-4a50-a9f8-58a49b64dea4" style="width:40%;" />
 
 ### 2. 학생 성취 분석 대시보드 – 교사용 분석 시스템
 #### 기능
@@ -109,8 +109,8 @@ Next.js–ChatGPT API–Supabase를 연결하는 **3계층 구조**를 기반으
   2. 개별 학생의 최근 질문 이력
   3. 질문이 많은 영역/개념/성향 분석
   4. 보고서 및 독후감 열람
-
-![image](https://github.com/user-attachments/assets/e4908006-04e7-4c1d-94fc-8b7b6d6d4f9e)
+  
+<img src="https://github.com/user-attachments/assets/e4908006-04e7-4c1d-94fc-8b7b6d6d4f9e" style="width:75%;" />
 
 #### 목적
 - **교사의 학습 개입을 정밀화**하고,
@@ -137,7 +137,7 @@ Next.js–ChatGPT API–Supabase를 연결하는 **3계층 구조**를 기반으
 - 기존의 주관적 생활기록 작성 한계를 극복하고, 보다 객관적이고 일관된 학생 기록 체계 구축
 - 향후 공교육 내 공정하고 투명한 평가 시스템 구현 기반 마련
   
-![image](https://github.com/user-attachments/assets/5686d959-f419-4ce6-a85c-dafca2aa4991)
+<img src="https://github.com/user-attachments/assets/5686d959-f419-4ce6-a85c-dafca2aa4991" style="width:40%;" />
 
 ## 3.3. 기능명세서
 
