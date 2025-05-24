@@ -85,19 +85,20 @@ Next.js–ChatGPT API–Supabase를 연결하는 **3계층 구조**를 기반으
 - 학생의 질문에 대해 교육청 성취 기준에 맞춰 사고 흐름을 확장하는 형성적 피드백을 제공합니다.
 - 단순 정답 제시가 아닌, 다음 스텝을 유도하고, 사고의 확장 방향을 제안하는 **비고츠키의 ZPD(근접발달영역)** 기반 시스템입니다.
 
-![image](https://github.com/user-attachments/assets/2996943f-4ae1-4388-8cc0-d0ab9cc5c632)
+<img src="https://github.com/user-attachments/assets/2996943f-4ae1-4388-8cc0-d0ab9cc5c632" style="width:50%;" />
 
 #### 작동 방식
 - **Vision API**를 통해 이미지 기반 질문 인식
 - **Assistant API**를 통해 질문 수준 분석 및 피드백 자동 생성
 - 학생 질문 → 문제 분석 → 풀이 단서 → 사고 유도 질문 → 피드백 제공의 흐름으로 진행
-![image](https://github.com/user-attachments/assets/12b356eb-6127-4d10-8fb3-7c7492160417)
+<img src="https://github.com/user-attachments/assets/12b356eb-6127-4d10-8fb3-7c7492160417" style="width:50%;" />
 
 
 #### 교육이론 기반 설계
 - **ZPD(i → i+1 단계 도달 유도)**
 - **Scaffolding(비계 설정)** 원칙에 따라 점진적이고 선별적인 개입을 수행
 - 교육부 교수-학습 지침 반영(2022 개정 교육과정)
+
 ![image](https://github.com/user-attachments/assets/b5277d73-6d1d-4a50-a9f8-58a49b64dea4)
 
 ### 2. 학생 성취 분석 대시보드 – 교사용 분석 시스템
@@ -143,7 +144,6 @@ Next.js–ChatGPT API–Supabase를 연결하는 **3계층 구조**를 기반으
 ## 3.4. 디렉토리 구조
 
 # 4. 설치 및 사용 방법
->발 |
 
 
 # 7. 해커톤 참여 후기
