@@ -53,7 +53,7 @@ export function Sidebar({ onCloseSidebar, className = "" }: SidebarProps) {
         <div className="flex items-center mt-4">
           <Avatar>
             <AvatarImage src="/placeholder.svg" />
-            <AvatarFallback>사</AvatarFallback>
+            <AvatarFallback></AvatarFallback>
           </Avatar>
           <div className="ml-2">
             <div className="text-sm font-medium">홍길동</div>

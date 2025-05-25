@@ -1,4 +1,4 @@
-import ChatInterface from "@/components/chat-interface";
+import ChatInterface from "@/components/chat-components/chat-interface";
 
 export default function StudentPage() {
   return (
