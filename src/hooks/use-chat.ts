@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useCallback, useEffect, use } from "react";
-import { createThread, extractProblemFromImage, sendMessageToAssistant } from "@/lib/api";
+import { useState } from "react";
+import { createThread, extractProblemFromImage, sendMessageToAssistant } from "@/libs/openai/api";
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, doc, getDoc, setDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
 interface Message {
   id: number;

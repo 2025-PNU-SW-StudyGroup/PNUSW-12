@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY!;
 
-export async function POST(req: NextRequest) {
+export async function POST() {
   try {
     const response = await fetch("https://api.openai.com/v1/threads", {
       method: "POST",
@@ -20,8 +20,9 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ threadId: data.id });
-  } catch (error: any) {
-    console.error("Thread 생성 오류:", error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (error) {
+    const err = error as Error;
+    console.error("Thread 생성 오류:", err);
+    return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }

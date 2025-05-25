@@ -36,8 +36,9 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ fileId: data.id });
-  } catch (error: any) {
-    console.error("파일 업로드 서버 오류:", error);
-    return NextResponse.json({ error: error.message || "서버 오류" }, { status: 500 });
+  } catch (error) {
+    const err = error as Error;
+    console.error("파일 업로드 서버 오류:", err);
+    return NextResponse.json({ error: err.message || "서버 오류" }, { status: 500 });
   }
 }
