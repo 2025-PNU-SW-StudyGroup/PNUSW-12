@@ -1,7 +1,7 @@
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { MoreHorizontal, GripVertical, MessageCircle } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { cn } from "@/libs/utils"
 
 // 김민준 학생의 질문 데이터
 const studentQuestions = [

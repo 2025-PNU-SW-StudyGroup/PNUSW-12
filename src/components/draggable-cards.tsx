@@ -3,7 +3,7 @@
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
 import { Card } from "@/components/ui/card"
-import { cn } from "@/lib/utils"
+import { cn } from "@/libs/utils"
 
 // Import the card components
 import { AIAssessmentCard } from "@/components/cards/ai-assessment-card"

@@ -5,7 +5,7 @@ import type React from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { cn } from "@/lib/utils";
+import { cn } from "@/libs/utils";
 
 // Logo do Mentorog
 const LogoMentorog = () => (

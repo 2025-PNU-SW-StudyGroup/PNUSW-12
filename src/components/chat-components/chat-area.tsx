@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Menu, Send, Image as ImageIcon } from "lucide-react";
 import { ChatMessage } from "./chat-message";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { createThread } from "@/lib/api";
+import { createThread } from "@/libs/openai/api";
 
 interface Message {
   id: number;

@@ -39,7 +39,9 @@ export async function POST(req: NextRequest) {
 
     const problemText = res.choices[0].message.content;
     return NextResponse.json({ result: problemText });
-  } catch (err: any) {
+  } catch (error) {
+    const err = error as Error;
+    console.error("이미지 분석 오류:", err);
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }

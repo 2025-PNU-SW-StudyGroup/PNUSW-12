@@ -88,8 +88,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({
       assistantReply: assistantMessage?.content?.[0]?.text?.value || "[AI 응답 없음]",
     });
-  } catch (error: any) {
-    console.error("전송 중 서버 오류:", error);
-    return NextResponse.json({ error: error.message || "서버 오류 발생" }, { status: 500 });
+  } catch (error) {
+    const err = error as Error;
+    console.error("전송 중 서버 오류:", err);
+    return NextResponse.json({ error: err.message || "서버 오류 발생" }, { status: 500 });
   }
 }
