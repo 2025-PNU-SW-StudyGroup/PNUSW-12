@@ -93,6 +93,10 @@ Next.js–ChatGPT API–Supabase를 연결하는 **3계층 구조**를 기반으
 - 학생 질문 → 문제 분석 → 풀이 단서 → 사고 유도 질문 → 피드백 제공의 흐름으로 진행
 <img src="https://github.com/user-attachments/assets/12b356eb-6127-4d10-8fb3-7c7492160417" style="width:50%;" />
 
+<img src ="https://github.com/user-attachments/assets/861139a9-5767-40ab-a5f1-9268f13c7c2d" style="width:50%;" />
+
+
+
 
 #### 교육이론 기반 설계
 - **ZPD(i → i+1 단계 도달 유도)**
